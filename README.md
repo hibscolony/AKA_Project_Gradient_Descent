@@ -1,5 +1,5 @@
 # AKA_Project_Gradient_Descent
-## 1. Number_of_Half-Pint_Equivalents_of_Alcoholic_Beverages_Drunk_Prediction.ipynb
+## 1. Alcoholic_Prediction.ipynb
 - Berisi Algoritma Gradient Descent untuk Linear Regression (Iteratif & Rekursif)
 - Berisi Latihan Model terhadap Data (from ucimlrepo import fetch_ucirepo)
 
