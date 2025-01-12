@@ -18,3 +18,6 @@
 
 ## 5. wb_rekursif.csv
 - Berisi Turunan dari Weight(0-4) dan Bias untuk Model Rekursif
+
+## 6. Pseudocode Recursive.txt
+- Berisi Pseudocode untuk Algoritma dengan Rekursif
