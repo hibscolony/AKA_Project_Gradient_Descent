@@ -1,0 +1,72 @@
+function find_min(i : integer, X : array 0..n-1 of array 0..4 of float, y : array 0..n-1 of float) --> array of float
+kamus
+	error : float
+	dldw0, dldw1, dldw2, dldw3, dldw4, dldb : float
+	result <- array of float(6)
+	function find_min(i,X,y)-->array of float
+algoritma
+	#Base Case
+	if i==0 then
+		error <- y[i] - (W[0] * X[i][0] + W[1] * X[i][1] + W[2] * X[i][2] + W[3] * X[i][3] + W[4] * X[i][4] + b)
+		dldw0 <- 2 * error * (-X[i][0])
+		dldw1 <- 2 * error * (-X[i][1])
+		dldw2 <- 2 * error * (-X[i][2])
+		dldw3 <- 2 * error * (-X[i][3])
+		dldw4 <- 2 * error * (-X[i][4])
+		dldb <- 2 * error * (-1)
+
+		result[0] <- dldw0
+		result[1] <- dldw1
+		result[2] <- dldw2
+		result[3] <- dldw3
+		result[4] <- dldw4
+		result[5] <- dldb
+
+		return result
+	else
+		dldw0,dldw1,dldw2,dldw3,dldw4,dldb <- find_min(i-1,X,y)
+		dldw0 <- result[0]
+		dldw1 <- result[1]
+		dldw2 <- result[2]
+		dldw3 <- result[3]
+		dldw4 <- result[4]
+		dldb <- result[5]
+
+		error <- y[i] - (W[0] * X[i][0] + W[1] * X[i][1] + W[2] * X[i][2] + W[3] * X[i][3] + W[4] * X[i][4] + b)
+		dldw0 <- dldw0 + 2 * error * (-X[i][0])
+		dldw1 <- dldw1 + 2 * error * (-X[i][1])
+		dldw2 <- dldw2 + 2 * error * (-X[i][2])
+		dldw3 <- dldw3 + 2 * error * (-X[i][3])
+		dldw4 <- dldw4 + 2 * error * (-X[i][4])
+		dldb <- dldb + 2 * error * (-1)
+
+		result[0] <- dldw0
+		result[1] <- dldw1
+		result[2] <- dldw2
+		result[3] <- dldw3
+		result[4] <- dldw4
+		result[5] <- dldb
+
+		return result
+	endif
+endfunction
+
+procedure gradient_descent_recursive(in/out W array 0..4 of float,in/out b : float,in/out X : array 0..n-1 of array 0..4 of float, in/out y : array 0..4 of float, in learning_rate : float,in n:integer)
+kamus
+	result : array of float(6)
+	dldw : array of float(5)
+	dldb : float
+algoritma
+	result[0],result[1],result[2],result[3],result[4],result[5] <- find_min(X.shape[0] - 1, X,y)
+	
+	dldw[0] <- result[0]
+	dldw[1] <- result[1]
+	dldw[2] <- result[2]
+	dldw[3] <- result[3]
+	dldw[4] <- result[4]
+	dldb <- result[5]
+	
+	W <- W-learning_rate * (dldw/n)
+	b <- b-learning_rate * (dldb/n)
+endprocedure
+	
