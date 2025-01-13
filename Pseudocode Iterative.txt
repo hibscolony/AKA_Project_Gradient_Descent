@@ -1,0 +1,21 @@
+procedure gradient_descent(in/out W array 0..4 of float,in/out b : float,in X : array 0..n-1 of array 0..4 of float,in y : array 0..n-1,in learning_rate : float,in n : integer)
+kamus
+    dldw : array 0..4 of float
+    dldb : float
+    i    : integer
+    {Asumsi: nilai default array float adalah 0}
+algoritma
+    for i <- 0 to n-1 do:
+        dldw[0] = dldw[0] + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-X[i][0])
+        dldw[1] = dldw[1] + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-X[i][1])
+        dldw[2] = dldw[2] + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-X[i][2])
+        dldw[3] = dldw[3] + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-X[i][3])
+        dldw[4] = dldw[4] + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-X[i][4])
+        dldb = dldb + 2*(y[i]-(W[0]*X[i][0]+W[1]*X[i][1]+W[2]*X[i][2]+W[3]*X[i][3]+W[4]*X[i][4]+b))*(-1)
+    W[0] = W[0] - learning_rate*(dldw[0]/n)
+    W[1] = W[1] - learning_rate*(dldw[1]/n)
+    W[2] = W[2] - learning_rate*(dldw[2]/n)
+    W[3] = W[3] - learning_rate*(dldw[3]/n)
+    W[4] = W[3] - learning_rate*(dldw[4]/n)
+    b = b - learning_rate*(dldb/n)
+endprocedure
